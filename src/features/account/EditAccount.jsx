@@ -7,12 +7,12 @@ function EditAccount() {
   return (
     <div>
       <Modal>
-        <Modal.Open opens="edit-account-form">
+        <Modal.Open opens="Edit Account">
           <Button>
             <HiPencil />
           </Button>
         </Modal.Open>
-        <Modal.Window name="edit-account-form">
+        <Modal.Window name="Edit Account">
           <EditAccountForm />
         </Modal.Window>
       </Modal>

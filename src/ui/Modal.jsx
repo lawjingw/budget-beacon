@@ -13,7 +13,7 @@ const StyledModal = styled.div`
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  padding: 1.6rem 2rem;
   transition: all 0.5s;
 `;
 
@@ -29,6 +29,16 @@ const Overlay = styled.div`
   transition: all 0.5s;
 `;
 
+const ModalHeader = styled.div`
+  display: flex;
+  padding-bottom: 1.6rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-grey-100);
+`;
+
 const Button = styled.button`
   background: none;
   border: none;
@@ -36,9 +46,6 @@ const Button = styled.button`
   border-radius: var(--border-radius-sm);
   transform: translateX(0.8rem);
   transition: all 0.2s;
-  position: absolute;
-  top: 1.2rem;
-  right: 1.9rem;
 
   &:hover {
     background-color: var(--color-grey-100);
@@ -81,9 +88,12 @@ function Window({ name, children }) {
   return createPortal(
     <Overlay>
       <StyledModal ref={modalRef}>
-        <Button onClick={close}>
-          <HiXMark />
-        </Button>
+        <ModalHeader>
+          <p>{name}</p>
+          <Button onClick={close}>
+            <HiXMark />
+          </Button>
+        </ModalHeader>
         <div>{children}</div>
       </StyledModal>
     </Overlay>,
