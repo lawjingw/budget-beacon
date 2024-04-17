@@ -5,7 +5,6 @@ import MainNav from "./MainNav";
 const StyledSidebar = styled.aside`
   background-color: var(--color-brand-900);
   padding: 2.6rem 1rem;
-  grid-row: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 2.8rem;

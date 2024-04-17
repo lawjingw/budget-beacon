@@ -48,21 +48,21 @@ function MainNav() {
     <nav>
       <NavList>
         <li>
-          <StyledNavLink to="/account">
-            <BsPiggyBankFill />
-            Account
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/">
+          <StyledNavLink to="/budget">
             <BsCashCoin />
             Budget
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/">
+          <StyledNavLink to="/reports">
             <BsBarChartLineFill />
             Reports
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/account">
+            <BsPiggyBankFill />
+            Account
           </StyledNavLink>
         </li>
       </NavList>
