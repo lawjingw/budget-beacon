@@ -19,7 +19,7 @@ const StyledNavLink = styled(NavLink)`
     align-items: center;
     gap: 1.2rem;
 
-    color: var(--color-grey-50);
+    color: var(--color-text-200);
     font-size: 1.6rem;
     font-weight: 500;
     padding: 1rem 1.4rem;
@@ -31,14 +31,15 @@ const StyledNavLink = styled(NavLink)`
   &:active,
   &.active:link,
   &.active:visited {
-    background-color: var(--color-brand-700);
+    color: var(--color-text-100);
+    background-color: var(--color-primary-100);
     border-radius: var(--border-radius-sm);
   }
 
   & svg {
     width: 2rem;
     height: 2rem;
-    color: var(--color-grey-50);
+    color: var(--color-text-200);
     transition: all 0.3s;
   }
 `;

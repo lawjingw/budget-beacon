@@ -16,6 +16,8 @@ const accountSlice = createSlice({
   },
 });
 
+export const selectCurrentBalance = (state) => state.account.currentBalance;
+
 export const { updateAccount } = accountSlice.actions;
 
 export default accountSlice.reducer;

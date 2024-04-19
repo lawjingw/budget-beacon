@@ -7,7 +7,7 @@ const CurrentBalance = styled.div`
   font-size: 1.8rem;
 
   & span {
-    color: var(--color-green-200);
+    color: var(--color-accent-100);
   }
 `;
 

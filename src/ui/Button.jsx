@@ -22,28 +22,21 @@ const sizes = {
 
 const variations = {
   primary: css`
-    color: var(--color-brand-50);
-    background-color: var(--color-brand-600);
+    color: var(--color-text-200);
+    background-color: var(--color-primary-100);
 
     &:hover {
-      background-color: var(--color-brand-700);
+      color: var(--color-text-100);
+      background-color: var(--color-primary-200);
     }
   `,
   secondary: css`
-    color: var(--color-grey-600);
-    background: var(--color-grey-0);
-    border: 1px solid var(--color-grey-200);
+    color: var(--color-text-200);
+    background: inherit;
 
     &:hover {
-      background-color: var(--color-grey-50);
-    }
-  `,
-  danger: css`
-    color: var(--color-red-100);
-    background-color: var(--color-red-700);
-
-    &:hover {
-      background-color: var(--color-red-800);
+      color: var(--color-text-100);
+      background-color: var(--color-bg-200);
     }
   `,
 };
@@ -51,7 +44,6 @@ const variations = {
 const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
   ${(props) => sizes[props.$size]};
   ${(props) => variations[props.$variation]};
 `;

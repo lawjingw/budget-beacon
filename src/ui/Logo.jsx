@@ -7,7 +7,6 @@ const StyledLogo = styled.div`
   align-items: center;
 
   & p {
-    color: var(--color-grey-50);
     font-size: 1.8rem;
     font-weight: 500;
   }

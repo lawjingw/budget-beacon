@@ -10,9 +10,9 @@ const StyledModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--color-grey-0);
+  background-color: var(--color-bg-100);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-bg-300);
   padding: 1.6rem 2rem;
   transition: all 0.5s;
 `;
@@ -36,7 +36,6 @@ const ModalHeader = styled.div`
   font-size: 1.8rem;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-grey-100);
 `;
 
 const Button = styled.button`
@@ -48,16 +47,12 @@ const Button = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-bg-200);
   }
 
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
-    color: var(--color-grey-500);
   }
 `;
 
