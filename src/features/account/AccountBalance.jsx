@@ -1,7 +1,7 @@
 import Heading from "../../ui/Heading";
 import { formatCurrency } from "../../utils/helpers";
-import { useAccount } from "./AccountContext";
 import { styled } from "styled-components";
+import { useSelector } from "react-redux";
 
 const CurrentBalance = styled.div`
   font-size: 1.8rem;
@@ -12,7 +12,7 @@ const CurrentBalance = styled.div`
 `;
 
 function AccountBalance() {
-  const { account } = useAccount();
+  const account = useSelector((state) => state.account);
 
   return (
     <div>

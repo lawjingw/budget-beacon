@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
 import Form from "../../ui/Form";
-import { useAccount } from "./AccountContext";
 import { useContext } from "react";
 import { ModalContext } from "../../ui/ModalContext";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import { updateAccount } from "./accountSlice";
 
 function EditAccountForm() {
-  const { account, dispatch } = useAccount();
+  const account = useSelector((state) => state.account);
+  const dispatch = useDispatch();
   const { close: closeModal } = useContext(ModalContext);
   const {
     register,
@@ -17,7 +19,7 @@ function EditAccountForm() {
   } = useForm({ defaultValues: account });
 
   const onSubmit = (data) => {
-    dispatch({ ...data, type: "update" });
+    dispatch(updateAccount(data));
     closeModal();
   };
 
