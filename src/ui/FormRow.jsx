@@ -13,10 +13,6 @@ const StyledFormRow = styled.div`
     padding-bottom: 0;
   }
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-
   &:has(button) {
     display: flex;
     justify-content: flex-end;
@@ -30,7 +26,7 @@ const Label = styled.label`
 
 const Error = styled.span`
   font-size: 1.4rem;
-  color: var(--color-red-700);
+  color: var(--color-accent-100);
 `;
 
 function FormRow({ label, errors, children }) {

@@ -88,10 +88,22 @@ export const initialState = [
 const budgetSlice = createSlice({
   name: "budget",
   initialState,
-  reducers: {},
+  reducers: {
+    assignBudget(state, action) {
+      const { category, assigned } = action.payload;
+      const existingCategory = state.find(
+        (budget) => budget.category === category
+      );
+      existingCategory.assigned = assigned;
+      existingCategory.available =
+        existingCategory.assigned - existingCategory.activity;
+    },
+  },
 });
 
 export const selectTotalAssigned = (state) =>
   state.budget.reduce((sum, item) => sum + item.assigned, 0);
+
+export const { assignBudget } = budgetSlice.actions;
 
 export default budgetSlice.reducer;
