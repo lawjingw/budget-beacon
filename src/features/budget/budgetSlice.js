@@ -4,7 +4,7 @@ import { getToday } from "../../utils/helpers";
 const today = getToday();
 export const initialState = [
   {
-    category: "Rent",
+    category: "🏠 Rent",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -12,7 +12,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Utilities",
+    category: "🔌 Utilities",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -20,7 +20,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Groceries",
+    category: "🛒 Groceries",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -28,7 +28,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Dining out",
+    category: "🍽 Dining out",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -36,7 +36,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Entertainment",
+    category: "🕹 Entertainment",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -44,7 +44,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Clothing",
+    category: "👗 Clothing",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -52,7 +52,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Gas",
+    category: "⛽ Gas",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -60,7 +60,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Fitness",
+    category: "🥊 Fitness",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -68,7 +68,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Music",
+    category: "🎧 Music",
     assigned: 0,
     activity: 0,
     available: 0,
@@ -76,7 +76,7 @@ export const initialState = [
     month: today,
   },
   {
-    category: "Vacation",
+    category: "🏖 Vacation",
     assigned: 0,
     activity: 0,
     available: 0,
