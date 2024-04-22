@@ -3,6 +3,8 @@ import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { useContext, useEffect, useRef } from "react";
 import { TableContext } from "../../ui/TableContext";
+import { useDispatch } from "react-redux";
+import { assignBudget } from "./budgetSlice";
 
 const Category = styled.div`
   font-size: 1.6rem;
@@ -26,7 +28,12 @@ const Assigned = styled.input`
 function BudgetRow({ budget }) {
   const { category, assigned, activity, available } = budget;
   const { selected } = useContext(TableContext);
+  const dispatch = useDispatch();
   const inputRef = useRef();
+
+  const handleUpdateAssigned = (money) => {
+    dispatch(assignBudget({ category: category, assigned: money }));
+  };
 
   useEffect(() => {
     if (category === selected) {
@@ -46,6 +53,8 @@ function BudgetRow({ budget }) {
           min="0"
           defaultValue={assigned}
           onClick={(e) => e.target.select()}
+          onBlur={(e) => handleUpdateAssigned(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && e.target.blur()}
         />
       ) : (
         <div>{formatCurrency(assigned)}</div>

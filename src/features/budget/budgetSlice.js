@@ -94,7 +94,7 @@ const budgetSlice = createSlice({
       const existingCategory = state.find(
         (budget) => budget.category === category
       );
-      existingCategory.assigned = assigned;
+      existingCategory.assigned = Number(assigned);
       existingCategory.available =
         existingCategory.assigned - existingCategory.activity;
     },

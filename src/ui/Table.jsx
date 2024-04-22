@@ -102,6 +102,7 @@ function Row({ name, children }) {
       $columns={columns}
       role="row"
       onClick={() => setSelected(name)}
+      onBlur={() => setSelected(null)}
     >
       {children}
     </StyledRow>
