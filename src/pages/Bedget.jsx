@@ -6,13 +6,11 @@ import Row from "../ui/Row";
 function Bedget() {
   return (
     <>
-      <Row type="horizontal">
+      <Row $columns="1fr 2fr">
         <Heading as="h1">Monthly Budget</Heading>
         <ReadyToAssign />
       </Row>
-      <Row>
-        <BudgetTable />
-      </Row>
+      <BudgetTable />
     </>
   );
 }

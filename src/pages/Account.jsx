@@ -5,7 +5,7 @@ import Row from "../ui/Row";
 function Account() {
   return (
     <>
-      <Row type="horizontal">
+      <Row $columns="repeat(2, minmax(0, 1fr))">
         <AccountBalance />
         <EditAccount />
       </Row>

@@ -10,6 +10,8 @@ const StyledReadyToAssign = styled.div`
   background-color: var(--color-accent-100);
   border-radius: var(--border-radius-md);
   color: var(--color-bg-200);
+  justify-self: start;
+
   & p {
     font-size: 1.4rem;
   }

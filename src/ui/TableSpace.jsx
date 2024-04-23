@@ -4,7 +4,6 @@ import { TableContext } from "./TableContext";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-bg-300);
-
   font-size: 1.4rem;
   background-color: var(--color-bg-200);
   border-radius: 7px;
@@ -33,7 +32,7 @@ const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
   transition: all 0.2s;
 
-  &[name=${(props) => props.$selected}] {
+  &[name="${(props) => props.$selected}"] {
     background-color: var(--color-bg-100);
   }
 
@@ -66,14 +65,18 @@ const Empty = styled.p`
   margin: 2.4rem;
 `;
 
-function Table({ columns, children }) {
+function TableSpace({ columns, children }) {
   const [selected, setSelected] = useState(null);
 
   return (
     <TableContext.Provider value={{ columns, selected, setSelected }}>
-      <StyledTable role="table">{children}</StyledTable>
+      {children}
     </TableContext.Provider>
   );
+}
+
+function Table({ children }) {
+  return <StyledTable role="table">{children}</StyledTable>;
 }
 
 function Header({ children }) {
@@ -92,8 +95,14 @@ function Body({ data, render }) {
   return <section>{data.map(render)}</section>;
 }
 
-function Row({ name, children }) {
+function Row({ name, renderItem }) {
   const { columns, selected, setSelected } = useContext(TableContext);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleClick = () => {
+    setSelected(name);
+    setIsEditing(true);
+  };
 
   return (
     <StyledRow
@@ -101,17 +110,18 @@ function Row({ name, children }) {
       $selected={selected}
       $columns={columns}
       role="row"
-      onClick={() => setSelected(name)}
-      onBlur={() => setSelected(null)}
+      className="row"
+      onClick={handleClick}
     >
-      {children}
+      {renderItem(isEditing, setIsEditing)}
     </StyledRow>
   );
 }
 
-Table.Header = Header;
-Table.Body = Body;
-Table.Row = Row;
-Table.Footer = Footer;
+TableSpace.Table = Table;
+TableSpace.Header = Header;
+TableSpace.Body = Body;
+TableSpace.Row = Row;
+TableSpace.Footer = Footer;
 
-export default Table;
+export default TableSpace;

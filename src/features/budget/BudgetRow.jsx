@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { TableContext } from "../../ui/TableContext";
 import { useDispatch } from "react-redux";
 import { assignBudget } from "./budgetSlice";
+import TableSpace from "../../ui/TableSpace";
 
 const Category = styled.div`
   font-size: 1.6rem;
@@ -12,57 +12,67 @@ const Category = styled.div`
   justify-self: left;
 `;
 
-const Assigned = styled.input`
+const AssignedNumber = styled.input`
+  background-color: inherit;
+  border-radius: var(--border-radius-sm);
+  padding: 1.2px 0;
+  border: none;
+  text-align: right;
+`;
+
+const AssignedText = styled.input`
   background-color: inherit;
   border-radius: var(--border-radius-sm);
   padding: 1.2px 0;
   border: none;
   text-align: right;
 
-  &:hover {
+  .row:hover & {
     outline: 2px solid var(--color-primary-200);
     outline-offset: -1px;
   }
 `;
 
 function BudgetRow({ budget }) {
-  const { category, assigned, activity, available } = budget;
-  const { selected } = useContext(TableContext);
+  const { id, category, assigned, activity, available } = budget;
   const dispatch = useDispatch();
-  const inputRef = useRef();
 
-  const handleUpdateAssigned = (money) => {
+  const handleUpdateAssigned = (money, setIsEditing) => {
     dispatch(assignBudget({ category: category, assigned: money }));
+    setIsEditing(false);
   };
 
-  useEffect(() => {
-    if (category === selected) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, [category, selected]);
-
   return (
-    <Table.Row name={category}>
-      <Category>{category}</Category>
-      {category === selected ? (
-        <Assigned
-          ref={inputRef}
-          type="number"
-          step="0.01"
-          min="0"
-          defaultValue={assigned}
-          onClick={(e) => e.target.select()}
-          onBlur={(e) => handleUpdateAssigned(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && e.target.blur()}
-        />
-      ) : (
-        <div>{formatCurrency(assigned)}</div>
+    <TableSpace.Row
+      name={id}
+      renderItem={(isEditing, setIsEditing) => (
+        <>
+          <Category>{category}</Category>
+          {isEditing ? (
+            <AssignedNumber
+              type="number"
+              step="0.01"
+              min="0"
+              defaultValue={assigned}
+              onBlur={(e) => handleUpdateAssigned(e.target.value, setIsEditing)}
+              onKeyDown={(e) =>
+                e.key === "Enter" &&
+                handleUpdateAssigned(e.target.value, setIsEditing)
+              }
+              autoFocus
+            />
+          ) : (
+            <AssignedText
+              type="text"
+              value={formatCurrency(assigned)}
+              readOnly
+            />
+          )}
+          <div>{formatCurrency(activity)}</div>
+          <div>{formatCurrency(available)}</div>
+        </>
       )}
-
-      <div>{formatCurrency(activity)}</div>
-      <div>{formatCurrency(available)}</div>
-    </Table.Row>
+    ></TableSpace.Row>
   );
 }
 
