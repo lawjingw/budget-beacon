@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-import { useContext } from "react";
-import { TableContext } from "../../ui/TableContext";
 import { useDispatch } from "react-redux";
 import { assignBudget } from "./budgetSlice";
 import TableSpace from "../../ui/TableSpace";
