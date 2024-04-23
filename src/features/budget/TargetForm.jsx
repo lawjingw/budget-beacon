@@ -9,6 +9,8 @@ import { FaTrash } from "react-icons/fa6";
 import styled from "styled-components";
 
 const DangerButton = styled(Button)`
+  display: flex;
+  align-items: center;
   margin-right: auto;
 `;
 
@@ -45,7 +47,12 @@ function TargetForm({ categoryBudget, closeForm }) {
         />
       </FormRow>
       <FormRow>
-        <DangerButton $variation="danger" $size="small" onClick={deleteTarget}>
+        <DangerButton
+          type="button"
+          $variation="danger"
+          $size="small"
+          onClick={deleteTarget}
+        >
           <FaTrash />
           Delete
         </DangerButton>

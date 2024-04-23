@@ -49,8 +49,6 @@ const variations = {
 };
 
 const Button = styled.button`
-  display: flex;
-  align-items: center;
   gap: 6px;
   border: none;
   border-radius: var(--border-radius-sm);

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import CreateTarget from "./CreateTarget";
 import EditTarget from "./EditTarget";
+import { useState } from "react";
+import TargetForm from "./TargetForm";
 
 const StyledTarget = styled.div`
   font-size: 1.4rem;
@@ -16,13 +18,25 @@ const TargetHeading = styled.header`
 `;
 
 function Target({ categoryBudget }) {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <StyledTarget>
       <TargetHeading>Target</TargetHeading>
-      {categoryBudget.target > 0 ? (
-        <EditTarget />
-      ) : (
-        <CreateTarget categoryBudget={categoryBudget} />
+      {showForm && (
+        <TargetForm
+          categoryBudget={categoryBudget}
+          closeForm={() => setShowForm(false)}
+        />
+      )}
+      {categoryBudget.target > 0 && !showForm && (
+        <EditTarget handleShowForm={setShowForm} />
+      )}
+      {categoryBudget.target === 0 && !showForm && (
+        <CreateTarget
+          categoryBudget={categoryBudget}
+          handleShowForm={setShowForm}
+        />
       )}
     </StyledTarget>
   );
