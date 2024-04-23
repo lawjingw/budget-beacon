@@ -2,21 +2,20 @@ import { ErrorMessage } from "@hookform/error-message";
 import { styled } from "styled-components";
 
 const StyledFormRow = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 12rem 1fr 1.2fr;
-  gap: 2.4rem;
-
-  padding: 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 0.6rem;
 
   &:last-child {
     padding-bottom: 0;
   }
 
   &:has(button) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1.2rem;
+    flex-direction: row;
+    justify-content: end;
+    padding-top: 2.2rem;
+    flex-wrap: wrap;
   }
 `;
 

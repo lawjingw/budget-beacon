@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TableContext } from "../../ui/TableContext";
 import Target from "./Target";
 import { useSelector } from "react-redux";
-import { selectCategoryById } from "./budgetSlice";
+import { selectBudgetById } from "./budgetSlice";
 
 const Panel = styled.div`
   border: 1px solid var(--color-bg-300);
@@ -20,12 +20,16 @@ const CategoryHeading = styled(Heading)`
 
 function CategoryPanel() {
   const { selected } = useContext(TableContext);
-  const category = useSelector((state) => selectCategoryById(state, selected));
+  const categoryBudget = useSelector((state) =>
+    selectBudgetById(state, selected)
+  );
 
   return (
     <Panel>
-      {selected && <CategoryHeading as="h3">{category}</CategoryHeading>}
-      {selected && <Target category={category} />}
+      {selected && (
+        <CategoryHeading as="h3">{categoryBudget.category}</CategoryHeading>
+      )}
+      {selected && <Target categoryBudget={categoryBudget} />}
     </Panel>
   );
 }

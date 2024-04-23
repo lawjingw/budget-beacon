@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle`
   --color-bg-100:#1A1A1A;
   --color-bg-200:#292929;
   --color-bg-300:#404040;
+  --color-danger-100:#dd4d51;
+  --color-danger-200:#8f001a;
       
   --backdrop-color: rgba(64, 64, 64, 0.1);
 

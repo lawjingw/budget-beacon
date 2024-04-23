@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CreateTarget from "./CreateTarget";
+import EditTarget from "./EditTarget";
 
 const StyledTarget = styled.div`
   font-size: 1.4rem;
@@ -14,11 +15,15 @@ const TargetHeading = styled.header`
   padding: 1.2rem 0;
 `;
 
-function Target({ category }) {
+function Target({ categoryBudget }) {
   return (
     <StyledTarget>
       <TargetHeading>Target</TargetHeading>
-      <CreateTarget category={category} />
+      {categoryBudget.target > 0 ? (
+        <EditTarget />
+      ) : (
+        <CreateTarget categoryBudget={categoryBudget} />
+      )}
     </StyledTarget>
   );
 }

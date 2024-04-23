@@ -2,10 +2,9 @@ import styled, { css } from "styled-components";
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    text-transform: uppercase;
-    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
     text-align: center;
   `,
   medium: css`
@@ -39,9 +38,20 @@ const variations = {
       background-color: var(--color-bg-200);
     }
   `,
+  danger: css`
+    color: var(--color-danger-200);
+    background: inherit;
+
+    &:hover {
+      background-color: var(--color-danger-100);
+    }
+  `,
 };
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
   border: none;
   border-radius: var(--border-radius-sm);
   ${(props) => sizes[props.$size]};

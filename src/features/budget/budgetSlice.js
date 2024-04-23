@@ -100,13 +100,16 @@ const budgetSlice = createSlice({
   initialState,
   reducers: {
     assignBudget(state, action) {
-      const { category, assigned } = action.payload;
-      const existingCategory = state.find(
-        (budget) => budget.category === category
-      );
-      existingCategory.assigned = Number(assigned);
-      existingCategory.available =
-        existingCategory.assigned - existingCategory.activity;
+      const { budgetId, assigned } = action.payload;
+      const categoryBudget = state.find((budget) => budget.id === budgetId);
+      categoryBudget.assigned = Number(assigned);
+      categoryBudget.available =
+        categoryBudget.assigned - categoryBudget.activity;
+    },
+    updateTarget(state, action) {
+      const { budgetId, target } = action.payload;
+      const categoryBudget = state.find((budget) => budget.id === budgetId);
+      categoryBudget.target = Number(target);
     },
   },
 });
@@ -114,9 +117,9 @@ const budgetSlice = createSlice({
 export const selectTotalAssigned = (state) =>
   state.budget.reduce((sum, item) => sum + item.assigned, 0);
 
-export const selectCategoryById = (state, id) =>
-  state.budget.find((category) => category.id === id)?.category;
+export const selectBudgetById = (state, id) =>
+  state.budget.find((category) => category.id === id);
 
-export const { assignBudget } = budgetSlice.actions;
+export const { assignBudget, updateTarget } = budgetSlice.actions;
 
 export default budgetSlice.reducer;

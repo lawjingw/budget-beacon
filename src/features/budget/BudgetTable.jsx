@@ -14,7 +14,7 @@ function BudgetTable() {
 
   return (
     <TableSpace columns="2.6fr 1fr 1fr 1fr">
-      <Row $columns="2.4fr 1fr">
+      <Row $columns="2.2fr 1fr">
         <TableSpace.Table>
           <TableSpace.Header>
             <CategoryHeader>Category</CategoryHeader>
