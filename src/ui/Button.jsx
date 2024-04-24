@@ -21,12 +21,10 @@ const sizes = {
 
 const variations = {
   primary: css`
-    color: var(--color-text-200);
     background-color: var(--color-primary-100);
 
     &:hover {
-      color: var(--color-text-100);
-      background-color: var(--color-primary-200);
+      background-color: var(--button-color-100);
     }
   `,
   secondary: css`

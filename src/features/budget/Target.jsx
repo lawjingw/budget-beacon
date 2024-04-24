@@ -30,7 +30,10 @@ function Target({ categoryBudget }) {
         />
       )}
       {categoryBudget.target > 0 && !showForm && (
-        <EditTarget handleShowForm={setShowForm} />
+        <EditTarget
+          categoryBudget={categoryBudget}
+          handleShowForm={setShowForm}
+        />
       )}
       {categoryBudget.target === 0 && !showForm && (
         <CreateTarget

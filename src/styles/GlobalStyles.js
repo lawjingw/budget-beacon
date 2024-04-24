@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
   --color-danger-200:#8f001a;
       
   --backdrop-color: rgba(64, 64, 64, 0.1);
+  --button-color-100: rgba(106, 0, 255, 0.8);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
