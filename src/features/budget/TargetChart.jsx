@@ -13,9 +13,9 @@ function TargetChart({ data }) {
           <g>
             <FaCheck
               size={34}
-              x="40%"
+              x="44%"
               y="34%"
-              color="var(--color-primary-200)"
+              color="var(--color-accent-100)"
             />
           </g>
         ) : (
@@ -23,7 +23,7 @@ function TargetChart({ data }) {
             x="50%"
             y="56%"
             textAnchor="middle"
-            fill="var(--color-accent-200)"
+            fill="var(--color-primary-300)"
             fontWeight="700"
             fontSize="1.8rem"
           >
@@ -44,8 +44,8 @@ function TargetChart({ data }) {
               key={`cell-${index}`}
               fill={
                 percentage >= 100
-                  ? "var(--color-primary-200)"
-                  : "var(--color-accent-100)"
+                  ? "var(--color-accent-100)"
+                  : "var(--color-primary-300)"
               }
               fillOpacity={index === 1 && 0.1}
             />

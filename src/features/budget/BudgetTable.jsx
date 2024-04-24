@@ -3,7 +3,7 @@ import BudgetRow from "./BudgetRow";
 import styled from "styled-components";
 import TableSpace from "../../ui/TableSpace";
 import Row from "../../ui/Row";
-import CategoryPanel from "./CategoryPanel";
+import BudgetPanel from "./BudgetPanel";
 
 const CategoryHeader = styled.div`
   justify-self: left;
@@ -27,7 +27,7 @@ function BudgetTable() {
             render={(budget) => <BudgetRow budget={budget} key={budget.id} />}
           />
         </TableSpace.Table>
-        <CategoryPanel />
+        <BudgetPanel />
       </Row>
     </TableSpace>
   );

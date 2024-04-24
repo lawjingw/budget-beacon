@@ -7,9 +7,9 @@ import Heading from "../../ui/Heading";
 
 const StyledReadyToAssign = styled.div`
   padding: 1rem 1.8rem;
-  background-color: var(--color-accent-100);
+  background-color: var(--color-bg-400);
   border-radius: var(--border-radius-md);
-  color: var(--color-bg-200);
+  color: var(--color-accent-100);
   justify-self: start;
 
   & p {

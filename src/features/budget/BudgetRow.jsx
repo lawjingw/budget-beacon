@@ -3,6 +3,7 @@ import { formatCurrency } from "../../utils/helpers";
 import { useDispatch } from "react-redux";
 import { assignBudget } from "./budgetSlice";
 import TableSpace from "../../ui/TableSpace";
+import Available from "./Available";
 
 const Category = styled.div`
   font-size: 1.6rem;
@@ -13,7 +14,6 @@ const Category = styled.div`
 const AssignedNumber = styled.input`
   background-color: inherit;
   border-radius: var(--border-radius-sm);
-  padding: 1.2px 0;
   border: none;
   text-align: right;
 `;
@@ -21,7 +21,6 @@ const AssignedNumber = styled.input`
 const AssignedText = styled.input`
   background-color: inherit;
   border-radius: var(--border-radius-sm);
-  padding: 1.2px 0;
   border: none;
   text-align: right;
 
@@ -32,7 +31,7 @@ const AssignedText = styled.input`
 `;
 
 function BudgetRow({ budget }) {
-  const { id, category, assigned, activity, available } = budget;
+  const { id, category, assigned, activity } = budget;
   const dispatch = useDispatch();
 
   const handleUpdateAssigned = (money, setIsEditing) => {
@@ -67,7 +66,7 @@ function BudgetRow({ budget }) {
             />
           )}
           <div>{formatCurrency(activity)}</div>
-          <div>{formatCurrency(available)}</div>
+          <Available budget={budget} />
         </>
       )}
     ></TableSpace.Row>

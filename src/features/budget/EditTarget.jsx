@@ -14,6 +14,14 @@ const TargetView = styled.div`
   }
 `;
 
+const TargetInfo = styled.div`
+  text-align: center;
+  background-color: ${(props) =>
+    props.$isTargetMeeted ? "var(--color-bg-400)" : "var(--color-bg-600)"};
+  padding: 1.2rem 1.8rem;
+  border-radius: var(--border-radius-sm);
+`;
+
 const TargetContent = styled.div`
   & div {
     display: flex;
@@ -22,10 +30,10 @@ const TargetContent = styled.div`
 `;
 
 function EditTarget({ categoryBudget, handleShowForm }) {
-  const toGo =
-    categoryBudget.target - categoryBudget.assigned < 0
-      ? 0
-      : categoryBudget.target - categoryBudget.assigned;
+  const isTargetMeeted = categoryBudget.assigned >= categoryBudget.target;
+  const toGo = isTargetMeeted
+    ? 0
+    : categoryBudget.target - categoryBudget.assigned;
 
   const data = [
     { name: "funded", value: categoryBudget.assigned },
@@ -36,6 +44,17 @@ function EditTarget({ categoryBudget, handleShowForm }) {
     <TargetView>
       <p>Refill Up to {formatCurrency(categoryBudget.target)} Each Month</p>
       <TargetChart data={data} />
+      <TargetInfo $isTargetMeeted={isTargetMeeted}>
+        {categoryBudget.assigned === 0 && (
+          <p>
+            Assign {formatCurrency(categoryBudget.target)} to meet your target
+          </p>
+        )}
+        {categoryBudget.assigned > 0 && !isTargetMeeted && (
+          <p>Assign {formatCurrency(toGo)} more to meet your target</p>
+        )}
+        {isTargetMeeted && <p>You&apos;ve met your target!</p>}
+      </TargetInfo>
       <TargetContent>
         <div>
           <p>Needed</p>
