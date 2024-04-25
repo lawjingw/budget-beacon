@@ -1,11 +1,16 @@
+import styled from "styled-components";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import EditAccountForm from "./EditAccountForm";
 import { HiPencil } from "react-icons/hi2";
 
+const StyledEditAccount = styled.div`
+  justify-self: end;
+`;
+
 function EditAccount() {
   return (
-    <div>
+    <StyledEditAccount>
       <Modal>
         <Modal.Open opens="Edit Account">
           <Button>
@@ -16,7 +21,7 @@ function EditAccount() {
           <EditAccountForm />
         </Modal.Window>
       </Modal>
-    </div>
+    </StyledEditAccount>
   );
 }
 

@@ -23,6 +23,7 @@ function BudgetTable() {
             <div>Available</div>
           </TableSpace.Header>
           <TableSpace.Body
+            name="budget"
             data={budget}
             render={(budget) => <BudgetRow budget={budget} key={budget.id} />}
           />

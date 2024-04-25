@@ -18,7 +18,7 @@ function AccountBalance() {
     <div>
       <Heading as="h1">{account.name}</Heading>
       <CurrentBalance>
-        Current balance:&nbsp;&nbsp;
+        Current Balance:&nbsp;&nbsp;
         <span>{formatCurrency(account.currentBalance)}</span>
       </CurrentBalance>
     </div>

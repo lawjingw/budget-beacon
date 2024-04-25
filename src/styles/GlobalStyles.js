@@ -63,6 +63,7 @@ select {
   font: inherit;
   color: inherit;
   border: 1px solid var(--color-bg-300);
+  background-color: var(--color-bg-100);
 }
 
 button {

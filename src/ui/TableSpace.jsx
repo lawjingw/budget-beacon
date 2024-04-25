@@ -89,8 +89,8 @@ function Header({ children }) {
   );
 }
 
-function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+function Body({ name, data, render }) {
+  if (!data.length) return <Empty>No {name} to show at the moment</Empty>;
 
   return <section>{data.map(render)}</section>;
 }
