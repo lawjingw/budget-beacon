@@ -27,7 +27,7 @@ function BudgetPanel() {
   return (
     <Panel>
       {selected && <Heading as="h3">{categoryBudget.category}</Heading>}
-      <AvailableBalance />
+      <AvailableBalance categoryBudget={categoryBudget} />
       {selected && <Target categoryBudget={categoryBudget} />}
     </Panel>
   );

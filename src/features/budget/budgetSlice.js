@@ -87,9 +87,9 @@ export const initialState = [
   {
     id: "10",
     category: "🏖 Vacation",
-    assigned: 10,
+    assigned: 0,
     activity: 0,
-    available: -20,
+    available: 0,
     target: 0,
     month: today,
   },
@@ -161,6 +161,12 @@ const budgetSlice = createSlice({
 
 export const selectTotalAssigned = (state) =>
   state.budget.reduce((sum, item) => sum + item.assigned, 0);
+
+export const selectTotalActivity = (state) =>
+  state.budget.reduce((sum, item) => sum + item.activity, 0);
+
+export const selectTotalAvailable = (state) =>
+  state.budget.reduce((sum, item) => sum + item.available, 0);
 
 export const selectBudgetById = (state, id) =>
   state.budget.find((category) => category.id === id);
