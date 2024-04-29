@@ -28,6 +28,26 @@ const accountSlice = createSlice({
         };
       },
     },
+    updateTransaction(state, action) {
+      const { transactionId, transaction } = action.payload;
+      const existingTransaction = state.transactions.find(
+        (transaction) => transaction.id === transactionId
+      );
+      existingTransaction.date = transaction.date;
+      existingTransaction.payee = transaction.payee;
+      existingTransaction.category = transaction.category;
+      existingTransaction.cashFlow = transaction.cashFlow;
+      existingTransaction.amount = transaction.amount;
+      existingTransaction.memo = transaction.memo;
+    },
+    delTransaction(state, action) {
+      state.transactions.splice(
+        state.transactions.findIndex(
+          (transaction) => transaction.id === action.payload
+        ),
+        1
+      );
+    },
   },
 });
 
@@ -35,6 +55,11 @@ export const selectCurrentBalance = (state) => state.account.currentBalance;
 
 export const selectTransactions = (state) => state.account.transactions;
 
-export const { updateAccount, createTransaction } = accountSlice.actions;
+export const {
+  updateAccount,
+  createTransaction,
+  updateTransaction,
+  delTransaction,
+} = accountSlice.actions;
 
 export default accountSlice.reducer;

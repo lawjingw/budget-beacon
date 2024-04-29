@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
   --color-bg-400:rgba(0, 229, 255, 0.2);
   --color-bg-500:rgba(106, 0, 255, 0.2);
   --color-bg-600:rgba(255, 177, 255, 0.2);
+  --color-bg-700:rgba(221, 77, 81, 0.2);
   --color-danger-100:#dd4d51;
   --color-danger-200:#8f001a;
       

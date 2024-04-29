@@ -7,7 +7,6 @@ import Select from "../../ui/Select";
 import { formatCurrency, getTodayString } from "../../utils/helpers";
 import { selectBudgets, selectReadyToAssign } from "../budget/budgetSlice";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const Amount = styled.div`
   display: flex;
