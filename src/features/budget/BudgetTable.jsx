@@ -4,13 +4,14 @@ import styled from "styled-components";
 import TableSpace from "../../ui/TableSpace";
 import Row from "../../ui/Row";
 import BudgetPanel from "./BudgetPanel";
+import { selectBudgets } from "./budgetSlice";
 
 const CategoryHeader = styled.div`
   justify-self: left;
 `;
 
 function BudgetTable() {
-  const budget = useSelector((state) => state.budget);
+  const budget = useSelector(selectBudgets);
 
   return (
     <TableSpace columns="2.6fr 1fr 1fr 1fr">

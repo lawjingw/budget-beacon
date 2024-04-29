@@ -112,7 +112,6 @@ h6 {
   overflow-wrap: break-word;
   hyphens: auto;
 }
-
 `;
 
 export default GlobalStyles;

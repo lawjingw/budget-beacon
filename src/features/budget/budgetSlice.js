@@ -1,144 +1,130 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getToday } from "../../utils/helpers";
 
-const today = getToday();
-export const initialState = [
-  {
-    id: "1",
-    category: "🏠 Rent",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "2",
-    category: "🔌 Utilities",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "3",
-    category: "🛒 Groceries",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "4",
-    category: "🍽 Dining out",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "5",
-    category: "🕹 Entertainment",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "6",
-    category: "👗 Clothing",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "7",
-    category: "⛽ Gas",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "8",
-    category: "🥊 Fitness",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "9",
-    category: "🎧 Music",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "10",
-    category: "🏖 Vacation",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "11",
-    category: "💻 Internet",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "12",
-    category: "📄 Insurance",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "13",
-    category: "📺 TV streaming",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "14",
-    category: "📱 Cell phone",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-  {
-    id: "15",
-    category: "🚇 Transportation",
-    assigned: 0,
-    activity: 0,
-    available: 0,
-    target: 0,
-    month: today,
-  },
-];
+export const initialState = {
+  readyToAssign: 3000,
+  budgets: [
+    {
+      id: "1",
+      category: "🏠 Rent",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "2",
+      category: "🔌 Utilities",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "3",
+      category: "🛒 Groceries",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "4",
+      category: "🍽 Dining out",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "5",
+      category: "🕹 Entertainment",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "6",
+      category: "👗 Clothing",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "7",
+      category: "⛽ Gas",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "8",
+      category: "🥊 Fitness",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "9",
+      category: "🎧 Music",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "10",
+      category: "🏖 Vacation",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "11",
+      category: "💻 Internet",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "12",
+      category: "📄 Insurance",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "13",
+      category: "📺 TV streaming",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "14",
+      category: "📱 Cell phone",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+    {
+      id: "15",
+      category: "🚇 Transportation",
+      assigned: 0,
+      activity: 0,
+      available: 0,
+      target: 0,
+    },
+  ],
+};
 
 const budgetSlice = createSlice({
   name: "budget",
@@ -146,30 +132,42 @@ const budgetSlice = createSlice({
   reducers: {
     assignBudget(state, action) {
       const { budgetId, assigned } = action.payload;
-      const categoryBudget = state.find((budget) => budget.id === budgetId);
+      const categoryBudget = state.budgets.find(
+        (budget) => budget.id === budgetId
+      );
       categoryBudget.assigned = Number(assigned);
       categoryBudget.available =
-        categoryBudget.assigned - categoryBudget.activity;
+        categoryBudget.assigned + categoryBudget.activity;
     },
     updateTarget(state, action) {
       const { budgetId, target } = action.payload;
-      const categoryBudget = state.find((budget) => budget.id === budgetId);
+      const categoryBudget = state.budgets.find(
+        (budget) => budget.id === budgetId
+      );
       categoryBudget.target = Number(target);
     },
   },
 });
 
+export const selectReadyToAssign = (state) => state.budget.readyToAssign;
+
+export const selectBudgets = (state) => state.budget.budgets;
+
 export const selectTotalAssigned = (state) =>
-  state.budget.reduce((sum, item) => sum + item.assigned, 0);
+  state.budget.budgets.reduce((sum, item) => sum + item.assigned, 0);
 
 export const selectTotalActivity = (state) =>
-  state.budget.reduce((sum, item) => sum + item.activity, 0);
+  state.budget.budgets.reduce((sum, item) => sum + item.activity, 0);
 
 export const selectTotalAvailable = (state) =>
-  state.budget.reduce((sum, item) => sum + item.available, 0);
+  state.budget.budgets.reduce((sum, item) => sum + item.available, 0);
 
 export const selectBudgetById = (state, id) =>
-  state.budget.find((category) => category.id === id);
+  state.budget.budgets.find((categoryBudget) => categoryBudget.id === id);
+
+export const selectCategoryById = (state, id) =>
+  state.budget.budgets.find((categoryBudget) => categoryBudget.id === id)
+    ?.category;
 
 export const { assignBudget, updateTarget } = budgetSlice.actions;
 

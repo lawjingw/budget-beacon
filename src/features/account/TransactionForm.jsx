@@ -4,18 +4,34 @@ import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
 import Form from "../../ui/Form";
 import Select from "../../ui/Select";
-import { formatCurrency } from "../../utils/helpers";
+import { formatCurrency, getTodayString } from "../../utils/helpers";
+import { selectBudgets, selectReadyToAssign } from "../budget/budgetSlice";
+import styled from "styled-components";
+import { useEffect } from "react";
+
+const Amount = styled.div`
+  display: flex;
+  gap: 1.2rem;
+
+  & input {
+    width: 100%;
+  }
+`;
 
 function TransactionForm({ methods, onSubmit, closeModal }) {
+  const todayStr = getTodayString();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = methods;
 
-  const budget = useSelector((state) => state.budget);
-  const categoryOptions = budget.map((categoryBudget) => ({
-    value: categoryBudget.id,
+  const readyToAssign = useSelector(selectReadyToAssign);
+  const budgets = useSelector(selectBudgets);
+  const categoryOptions = budgets.map((categoryBudget) => ({
+    value: categoryBudget.category,
     label: `${categoryBudget.category} [${formatCurrency(
       categoryBudget.available
     )}]`,
@@ -27,6 +43,7 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
         <Input
           type="date"
           id="date"
+          defaultValue={todayStr}
           {...register("date", {
             required: "This field is required",
           })}
@@ -35,36 +52,64 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
       <FormRow label="Payee" errors={errors}>
         <Input
           type="text"
-          step="0.01"
           id="payee"
           {...register("payee", {
             required: "This field is required",
           })}
         />
       </FormRow>
-      <FormRow label="Amount" errors={errors}>
-        <Input
-          type="number"
-          step="0.01"
-          min="0"
-          id="outflow"
-          {...register("outflow", {
-            required: "This field is required",
-            min: {
-              value: 0,
-              message: "Amount should be at least 0",
-            },
-          })}
-        />
-      </FormRow>
       <FormRow label="Category" errors={errors}>
         <Select
           id="category"
-          options={categoryOptions}
           {...register("category", {
-            required: "This field is required",
+            required: "Select one option",
+            onChange: (e) =>
+              setValue(
+                "cashFlow",
+                e.target.value === "Ready to Assign" ? "inflow" : "outflow"
+              ),
           })}
-        />
+        >
+          <option value="">-- Select Category --</option>
+          <option value="Ready to Assign">
+            Ready to Assign [{formatCurrency(readyToAssign)}]
+          </option>
+          {categoryOptions.map((option) => {
+            return (
+              <option value={option.value} key={option.value}>
+                {option.label}
+              </option>
+            );
+          })}
+        </Select>
+      </FormRow>
+      <FormRow label="Amount" errors={errors} childId="amount">
+        <Amount>
+          <Select
+            id="cashFlow"
+            defaultValue="outflow"
+            {...register("cashFlow")}
+          >
+            <option value="inflow">INFLOW</option>
+            <option value="outflow">OUTFLOW</option>
+          </Select>
+          <Input
+            type="number"
+            step="0.01"
+            min="0"
+            id="amount"
+            {...register("amount", {
+              required: "This field is required",
+              min: {
+                value: 0,
+                message: "Amount should be at least 0",
+              },
+            })}
+          />
+        </Amount>
+      </FormRow>
+      <FormRow label="Memo" errors={errors}>
+        <Input type="text" id="memo" {...register("memo")} />
       </FormRow>
       <FormRow>
         <Button

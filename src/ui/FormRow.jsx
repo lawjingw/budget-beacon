@@ -7,7 +7,7 @@ const StyledFormRow = styled.div`
   padding: 1rem 0;
   gap: 0.6rem;
 
-  &:last-child {
+  &:has(button):last-child {
     padding-bottom: 0;
   }
 
@@ -16,6 +16,10 @@ const StyledFormRow = styled.div`
     justify-content: end;
     padding-top: 2.2rem;
     flex-wrap: wrap;
+  }
+
+  &:has(input[type="date"]) {
+    position: relative;
   }
 `;
 
@@ -28,15 +32,17 @@ const Error = styled.span`
   color: var(--color-danger-100);
 `;
 
-function FormRow({ label, errors, children }) {
+function FormRow({ label, errors, childId = null, children }) {
+  const id = childId ? childId : children.props?.id;
+
   return (
     <StyledFormRow>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+      {label && <Label htmlFor={id}>{label}</Label>}
       {children}
       {errors && (
         <ErrorMessage
           errors={errors}
-          name={children.props.id}
+          name={id}
           render={({ message }) => <Error>{message}</Error>}
         />
       )}

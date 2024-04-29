@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectTotalAssigned } from "./budgetSlice";
-import { selectCurrentBalance } from "../account/accountSlice";
+import { selectReadyToAssign } from "./budgetSlice";
 import { formatCurrency } from "../../utils/helpers";
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
@@ -18,9 +17,7 @@ const StyledReadyToAssign = styled.div`
 `;
 
 function ReadyToAssign() {
-  const totalAssigned = useSelector(selectTotalAssigned);
-  const currentBalance = useSelector(selectCurrentBalance);
-  const readyToAssign = currentBalance - totalAssigned;
+  const readyToAssign = useSelector(selectReadyToAssign);
 
   return (
     <StyledReadyToAssign>
