@@ -4,6 +4,7 @@ import { ModalContext } from "../../ui/ModalContext";
 import TransactionForm from "./TransactionForm";
 import { useDispatch } from "react-redux";
 import { createTransaction } from "./accountSlice";
+import { changeBudget } from "../budget/changeBudget";
 
 function CreateTransactionForm() {
   const methods = useForm();
@@ -12,6 +13,7 @@ function CreateTransactionForm() {
 
   const onSubmit = (data) => {
     dispatch(createTransaction(data));
+    changeBudget(data, dispatch);
     closeModal();
   };
 

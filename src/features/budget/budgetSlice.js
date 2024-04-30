@@ -146,6 +146,30 @@ const budgetSlice = createSlice({
       );
       categoryBudget.target = target;
     },
+    spend(state, action) {
+      const { budgetId, amount } = action.payload;
+      const categoryBudget = state.budgets.find(
+        (budget) => budget.id === budgetId
+      );
+      categoryBudget.activity = categoryBudget.activity - amount;
+      categoryBudget.available =
+        categoryBudget.assigned + categoryBudget.activity;
+    },
+    fund(state, action) {
+      const { budgetId, amount } = action.payload;
+      const categoryBudget = state.budgets.find(
+        (budget) => budget.id === budgetId
+      );
+      categoryBudget.activity = categoryBudget.activity + amount;
+      categoryBudget.available =
+        categoryBudget.assigned + categoryBudget.activity;
+    },
+    increaseReadyToAssign(state, action) {
+      state.readyToAssign = state.readyToAssign + action.payload;
+    },
+    decreaseReadyToAssign(state, action) {
+      state.readyToAssign = state.readyToAssign - action.payload;
+    },
   },
 });
 
@@ -166,9 +190,18 @@ export const selectBudgetById = (state, id) =>
   state.budget.budgets.find((categoryBudget) => categoryBudget.id === id);
 
 export const selectCategoryById = (state, id) =>
-  state.budget.budgets.find((categoryBudget) => categoryBudget.id === id)
-    ?.category;
+  id === "readyToAssign"
+    ? "Ready to Assign"
+    : state.budget.budgets.find((categoryBudget) => categoryBudget.id === id)
+        ?.category;
 
-export const { assignBudget, updateTarget } = budgetSlice.actions;
+export const {
+  assignBudget,
+  updateTarget,
+  spend,
+  fund,
+  increaseReadyToAssign,
+  decreaseReadyToAssign,
+} = budgetSlice.actions;
 
 export default budgetSlice.reducer;

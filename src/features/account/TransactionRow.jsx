@@ -6,8 +6,9 @@ import Modal from "../../ui/Modal";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import EditTransactionForm from "./EditTransactionForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { delTransaction } from "./accountSlice";
+import { selectCategoryById } from "../budget/budgetSlice";
 
 const Date = styled.div`
   justify-self: left;
@@ -26,8 +27,9 @@ const Memo = styled.div`
 `;
 
 function TransactionRow({ transaction }) {
-  const { id, date, payee, category, memo, cashFlow, amount } = transaction;
   const dispatch = useDispatch();
+  const { id, date, payee, budgetId, memo, cashFlow, amount } = transaction;
+  const category = useSelector((state) => selectCategoryById(state, budgetId));
 
   return (
     <TableSpace.Row

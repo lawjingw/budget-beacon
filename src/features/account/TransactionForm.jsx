@@ -30,7 +30,7 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
   const readyToAssign = useSelector(selectReadyToAssign);
   const budgets = useSelector(selectBudgets);
   const categoryOptions = budgets.map((categoryBudget) => ({
-    value: categoryBudget.category,
+    value: categoryBudget.id,
     label: `${categoryBudget.category} [${formatCurrency(
       categoryBudget.available
     )}]`,
@@ -59,18 +59,18 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
       </FormRow>
       <FormRow label="Category" errors={errors}>
         <Select
-          id="category"
-          {...register("category", {
+          id="budgetId"
+          {...register("budgetId", {
             required: "Select one option",
             onChange: (e) =>
               setValue(
                 "cashFlow",
-                e.target.value === "Ready to Assign" ? "inflow" : "outflow"
+                e.target.value === "readyToAssign" ? "inflow" : "outflow"
               ),
           })}
         >
           <option value="">-- Select Category --</option>
-          <option value="Ready to Assign">
+          <option value="readyToAssign">
             Ready to Assign [{formatCurrency(readyToAssign)}]
           </option>
           {categoryOptions.map((option) => {
