@@ -35,7 +35,7 @@ function BudgetRow({ budget }) {
   const dispatch = useDispatch();
 
   const handleUpdateAssigned = (money, setIsEditing) => {
-    dispatch(assignBudget({ budgetId: id, assigned: money }));
+    dispatch(assignBudget({ budgetId: id, assigned: Number(money) }));
     setIsEditing(false);
   };
 

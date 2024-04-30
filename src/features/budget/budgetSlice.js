@@ -135,7 +135,7 @@ const budgetSlice = createSlice({
       const categoryBudget = state.budgets.find(
         (budget) => budget.id === budgetId
       );
-      categoryBudget.assigned = Number(assigned);
+      categoryBudget.assigned = assigned;
       categoryBudget.available =
         categoryBudget.assigned + categoryBudget.activity;
     },
@@ -144,7 +144,7 @@ const budgetSlice = createSlice({
       const categoryBudget = state.budgets.find(
         (budget) => budget.id === budgetId
       );
-      categoryBudget.target = Number(target);
+      categoryBudget.target = target;
     },
   },
 });

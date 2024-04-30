@@ -24,7 +24,7 @@ function TransactionTable() {
   const transactions = useSelector(selectTransactions);
 
   return (
-    <TableSpace columns="1fr 1.8fr 2.8fr 1.8fr 1fr 1fr 0.6fr">
+    <TableSpace columns="1fr 2.8fr 1.8fr 2.8fr 1fr 1fr 0.6fr">
       <TableSpace.Table>
         <TableSpace.Header>
           <DateHeader>Date</DateHeader>

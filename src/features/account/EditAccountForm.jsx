@@ -41,10 +41,7 @@ function EditAccountForm() {
           id="currentBalance"
           {...register("currentBalance", {
             required: "This field is required",
-            min: {
-              value: 0,
-              message: "Current balance should be at least 0",
-            },
+            valueAsNumber: true,
           })}
         />
       </FormRow>

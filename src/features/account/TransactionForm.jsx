@@ -103,6 +103,7 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
                 value: 0,
                 message: "Amount should be at least 0",
               },
+              valueAsNumber: true,
             })}
           />
         </Amount>

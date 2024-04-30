@@ -1,10 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
+import { getTodayString } from "../../utils/helpers";
 
 const initialState = {
   name: "My account",
   currentBalance: 3000,
-  transactions: [],
+  transactions: [
+    {
+      id: uuid(),
+      date: getTodayString("1"),
+      payee: "Starting Balance",
+      category: "Ready to Assign",
+      memo: "",
+      cashFlow: "inflow",
+      amount: 3000,
+    },
+  ],
 };
 
 const accountSlice = createSlice({
@@ -12,8 +23,20 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     updateAccount(state, action) {
-      state.name = action.payload.name;
-      state.currentBalance = action.payload.currentBalance;
+      const { name, currentBalance } = action.payload;
+      const balanceDiff = currentBalance - state.currentBalance;
+      state.transactions.push({
+        id: uuid(),
+        date: getTodayString(),
+        payee: "Manual Balance Adjustment",
+        category: "Ready to Assign",
+        memo: "",
+        cashFlow: balanceDiff < 0 ? "outflow" : "inflow",
+        amount: Math.abs(balanceDiff),
+      });
+
+      state.name = name;
+      state.currentBalance = currentBalance;
     },
     createTransaction: {
       reducer(state, action) {

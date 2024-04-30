@@ -43,6 +43,7 @@ function TargetForm({ categoryBudget, closeForm }) {
           autoFocus
           {...register("target", {
             required: "This field is required",
+            valueAsNumber: true,
           })}
         />
       </FormRow>
