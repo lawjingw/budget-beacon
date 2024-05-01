@@ -1,14 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { formatCurrency, getTodayString } from "../../utils/helpers";
+import { v4 as uuid } from "uuid";
 
 export const initialState = {
   readyToAssign: 3000,
+  transactions: [
+    {
+      id: uuid(),
+      date: getTodayString("1"),
+      payee: "Starting Balance",
+      budgetId: "readyToAssign",
+      memo: "",
+      cashFlow: "inflow",
+      amount: 3000,
+    },
+  ],
   budgets: [
     {
       id: "1",
       category: "🏠 Rent",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -16,7 +28,6 @@ export const initialState = {
       category: "🔌 Utilities",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -24,7 +35,6 @@ export const initialState = {
       category: "🛒 Groceries",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -32,7 +42,6 @@ export const initialState = {
       category: "🍽 Dining out",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -40,7 +49,6 @@ export const initialState = {
       category: "🕹 Entertainment",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -48,7 +56,6 @@ export const initialState = {
       category: "👗 Clothing",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -56,7 +63,6 @@ export const initialState = {
       category: "⛽ Gas",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -64,7 +70,6 @@ export const initialState = {
       category: "🥊 Fitness",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -72,7 +77,6 @@ export const initialState = {
       category: "🎧 Music",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -80,7 +84,6 @@ export const initialState = {
       category: "🏖 Vacation",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -88,7 +91,6 @@ export const initialState = {
       category: "💻 Internet",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -96,7 +98,6 @@ export const initialState = {
       category: "📄 Insurance",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -104,7 +105,6 @@ export const initialState = {
       category: "📺 TV streaming",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -112,7 +112,6 @@ export const initialState = {
       category: "📱 Cell phone",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
     {
@@ -120,11 +119,19 @@ export const initialState = {
       category: "🚇 Transportation",
       assigned: 0,
       activity: 0,
-      available: 0,
       target: 0,
     },
   ],
 };
+
+const calActivity = (transactions) =>
+  transactions.reduce(
+    (sum, transaction) =>
+      transaction.cashFlow === "outflow"
+        ? sum - transaction.amount
+        : sum + transaction.amount,
+    0
+  );
 
 const budgetSlice = createSlice({
   name: "budget",
@@ -136,8 +143,6 @@ const budgetSlice = createSlice({
         (budget) => budget.id === budgetId
       );
       categoryBudget.assigned = assigned;
-      categoryBudget.available =
-        categoryBudget.assigned + categoryBudget.activity;
     },
     updateTarget(state, action) {
       const { budgetId, target } = action.payload;
@@ -146,34 +151,58 @@ const budgetSlice = createSlice({
       );
       categoryBudget.target = target;
     },
-    spend(state, action) {
-      const { budgetId, amount } = action.payload;
-      const categoryBudget = state.budgets.find(
-        (budget) => budget.id === budgetId
+    addTransaction: {
+      reducer(state, action) {
+        state.transactions.push(action.payload);
+      },
+      prepare(transaction) {
+        return {
+          payload: {
+            id: uuid(),
+            ...transaction,
+          },
+        };
+      },
+    },
+    delTransaction(state, action) {
+      state.transactions.splice(
+        state.transactions.findIndex(
+          (transaction) => transaction.id === action.payload
+        ),
+        1
       );
-      categoryBudget.activity = categoryBudget.activity - amount;
-      categoryBudget.available =
-        categoryBudget.assigned + categoryBudget.activity;
     },
-    fund(state, action) {
-      const { budgetId, amount } = action.payload;
-      const categoryBudget = state.budgets.find(
-        (budget) => budget.id === budgetId
+    updateTransaction(state, action) {
+      const { transactionId, transaction } = action.payload;
+      const existingTransaction = state.transactions.find(
+        (transaction) => transaction.id === transactionId
       );
-      categoryBudget.activity = categoryBudget.activity + amount;
-      categoryBudget.available =
-        categoryBudget.assigned + categoryBudget.activity;
+      existingTransaction.date = transaction.date;
+      existingTransaction.payee = transaction.payee;
+      existingTransaction.category = transaction.category;
+      existingTransaction.cashFlow = transaction.cashFlow;
+      existingTransaction.amount = transaction.amount;
+      existingTransaction.memo = transaction.memo;
     },
-    increaseReadyToAssign(state, action) {
-      state.readyToAssign = state.readyToAssign + action.payload;
-    },
-    decreaseReadyToAssign(state, action) {
-      state.readyToAssign = state.readyToAssign - action.payload;
+    updateActivity(state, action) {
+      const transactions = state.transactions.filter(
+        (trans) => trans.budgetId === action.payload
+      );
+      if (action.payload === "readyToAssign") {
+        state.readyToAssign = calActivity(transactions);
+      } else {
+        const categoryBudget = state.budgets.find(
+          (budget) => budget.id === action.payload
+        );
+        categoryBudget.activity = calActivity(transactions);
+      }
     },
   },
 });
 
-export const selectReadyToAssign = (state) => state.budget.readyToAssign;
+export const selectReadyToAssign = (state) =>
+  state.budget.readyToAssign -
+  state.budget.budgets.reduce((sum, item) => sum + item.assigned, 0);
 
 export const selectBudgets = (state) => state.budget.budgets;
 
@@ -181,10 +210,14 @@ export const selectTotalAssigned = (state) =>
   state.budget.budgets.reduce((sum, item) => sum + item.assigned, 0);
 
 export const selectTotalActivity = (state) =>
-  state.budget.budgets.reduce((sum, item) => sum + item.activity, 0);
+  state.budget.budgets.reduce(
+    (sum, categoryBudget) => sum + categoryBudget.activity,
+    0
+  );
 
-export const selectTotalAvailable = (state) =>
-  state.budget.budgets.reduce((sum, item) => sum + item.available, 0);
+export const selectActivityById = (state, id) =>
+  state.budget.budgets.find((categoryBudget) => categoryBudget.id === id)
+    ?.activity;
 
 export const selectBudgetById = (state, id) =>
   state.budget.budgets.find((categoryBudget) => categoryBudget.id === id);
@@ -195,13 +228,23 @@ export const selectCategoryById = (state, id) =>
     : state.budget.budgets.find((categoryBudget) => categoryBudget.id === id)
         ?.category;
 
+export const selectCategoryOptions = (state) =>
+  state.budget.budgets.map((categoryBudget) => {
+    const activity = categoryBudget.activity;
+    const available = categoryBudget.assigned + activity;
+    return {
+      value: categoryBudget.id,
+      label: `${categoryBudget.category} [${formatCurrency(available)}]`,
+    };
+  });
+
 export const {
   assignBudget,
   updateTarget,
-  spend,
-  fund,
-  increaseReadyToAssign,
-  decreaseReadyToAssign,
+  addTransaction,
+  updateTransaction,
+  delTransaction,
+  updateActivity,
 } = budgetSlice.actions;
 
 export default budgetSlice.reducer;

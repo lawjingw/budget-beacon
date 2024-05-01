@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-import { useDispatch } from "react-redux";
-import { assignBudget } from "./budgetSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { assignBudget, selectActivityById } from "./budgetSlice";
 import TableSpace from "../../ui/TableSpace";
 import Available from "./Available";
 
@@ -31,7 +31,8 @@ const AssignedText = styled.input`
 `;
 
 function BudgetRow({ budget }) {
-  const { id, category, assigned, activity } = budget;
+  const { id, category, assigned, target } = budget;
+  const activity = useSelector((state) => selectActivityById(state, id));
   const dispatch = useDispatch();
 
   const handleUpdateAssigned = (money, setIsEditing) => {
@@ -66,7 +67,7 @@ function BudgetRow({ budget }) {
             />
           )}
           <div>{formatCurrency(activity)}</div>
-          <Available budget={budget} />
+          <Available assigned={assigned} activity={activity} target={target} />
         </>
       )}
     ></TableSpace.Row>

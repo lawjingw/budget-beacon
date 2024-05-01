@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import Form from "../../ui/Form";
 import Select from "../../ui/Select";
 import { formatCurrency, getTodayString } from "../../utils/helpers";
-import { selectBudgets, selectReadyToAssign } from "../budget/budgetSlice";
+import {
+  selectCategoryOptions,
+  selectReadyToAssign,
+} from "../budget/budgetSlice";
 import styled from "styled-components";
 
 const Amount = styled.div`
@@ -28,13 +31,7 @@ function TransactionForm({ methods, onSubmit, closeModal }) {
   } = methods;
 
   const readyToAssign = useSelector(selectReadyToAssign);
-  const budgets = useSelector(selectBudgets);
-  const categoryOptions = budgets.map((categoryBudget) => ({
-    value: categoryBudget.id,
-    label: `${categoryBudget.category} [${formatCurrency(
-      categoryBudget.available
-    )}]`,
-  }));
+  const categoryOptions = useSelector(selectCategoryOptions);
 
   return (
     <Form $type="modal" onSubmit={handleSubmit(onSubmit)}>

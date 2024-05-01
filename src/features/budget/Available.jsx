@@ -31,14 +31,14 @@ const StyledAvailable = styled.div`
   ${(props) => stateColors[props.$state]};
 `;
 
-function Available({ budget }) {
-  const { assigned, available, target } = budget;
+function Available({ assigned, activity, target }) {
+  const available = assigned + activity;
   const budgetState = calBudgetState(assigned, available, target);
 
   return (
     <div>
       <StyledAvailable $state={budgetState}>
-        {formatCurrency(budget.available)}
+        {formatCurrency(available)}
       </StyledAvailable>
     </div>
   );

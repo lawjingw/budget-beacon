@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {
+  selectActivityById,
   selectTotalActivity,
   selectTotalAssigned,
-  selectTotalAvailable,
 } from "./budgetSlice";
 import Available from "./Available";
 import { formatCurrency } from "../../utils/helpers";
@@ -36,16 +36,23 @@ const AvailableContent = styled.div`
 
 function AvailableBalance({ categoryBudget }) {
   const totalAssigned = useSelector(selectTotalAssigned);
-  const totalActivity = useSelector(selectTotalActivity);
-  const totalAvailable = useSelector(selectTotalAvailable);
+  const activity = useSelector(
+    categoryBudget
+      ? (state) => selectActivityById(state, categoryBudget.id)
+      : selectTotalActivity
+  );
+  const totalAvailable = totalAssigned + activity;
 
   return (
     <BalanceContent>
       <AvailableHeading>
         <header>Available Balance</header>
-
         {categoryBudget ? (
-          <Available budget={categoryBudget} />
+          <Available
+            assigned={categoryBudget.assigned}
+            activity={activity}
+            target={categoryBudget.target}
+          />
         ) : (
           <p>{formatCurrency(totalAvailable)}</p>
         )}
@@ -61,11 +68,7 @@ function AvailableBalance({ categoryBudget }) {
         </div>
         <div>
           <p>Activity</p>
-          <p>
-            {categoryBudget
-              ? formatCurrency(categoryBudget.activity)
-              : formatCurrency(totalActivity)}
-          </p>
+          <p>{formatCurrency(activity)}</p>
         </div>
       </AvailableContent>
     </BalanceContent>

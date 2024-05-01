@@ -7,19 +7,36 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { updateAccount } from "./accountSlice";
+import { getTodayString } from "../../utils/helpers";
+import { addTransaction, updateActivity } from "../budget/budgetSlice";
 
 function EditAccountForm() {
-  const account = useSelector((state) => state.account);
+  const { name, currentBalance } = useSelector((state) => state.account);
   const dispatch = useDispatch();
   const { close: closeModal } = useContext(ModalContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: account });
+  } = useForm({ defaultValues: { name, currentBalance } });
 
   const onSubmit = (data) => {
-    dispatch(updateAccount(data));
+    const balanceDiff = data.currentBalance - currentBalance;
+
+    if (balanceDiff !== 0) {
+      const transaction = {
+        date: getTodayString(),
+        payee: "Manual Balance Adjustment",
+        budgetId: "readyToAssign",
+        memo: "",
+        cashFlow: balanceDiff < 0 ? "outflow" : "inflow",
+        amount: Math.abs(balanceDiff),
+      };
+      dispatch(updateAccount(data));
+      dispatch(addTransaction(transaction));
+      dispatch(updateActivity(transaction.budgetId));
+    }
+
     closeModal();
   };
 

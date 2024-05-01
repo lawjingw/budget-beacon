@@ -7,8 +7,11 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import EditTransactionForm from "./EditTransactionForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDispatch, useSelector } from "react-redux";
-import { delTransaction } from "./accountSlice";
-import { selectCategoryById } from "../budget/budgetSlice";
+import {
+  delTransaction,
+  selectCategoryById,
+  updateActivity,
+} from "../budget/budgetSlice";
 
 const Date = styled.div`
   justify-self: left;
@@ -30,6 +33,11 @@ function TransactionRow({ transaction }) {
   const dispatch = useDispatch();
   const { id, date, payee, budgetId, memo, cashFlow, amount } = transaction;
   const category = useSelector((state) => selectCategoryById(state, budgetId));
+
+  const handleDelTransaction = () => {
+    dispatch(delTransaction(id));
+    dispatch(updateActivity(budgetId));
+  };
 
   return (
     <TableSpace.Row
@@ -59,7 +67,7 @@ function TransactionRow({ transaction }) {
               <Modal.Window name="Confirm Delete">
                 <ConfirmDelete
                   resourceName="transaction"
-                  onConfirm={() => dispatch(delTransaction(id))}
+                  onConfirm={handleDelTransaction}
                 />
               </Modal.Window>
             </Modal>

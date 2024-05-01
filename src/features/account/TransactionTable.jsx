@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import TableSpace from "../../ui/TableSpace";
 import TransactionRow from "./TransactionRow";
-import { selectTransactions } from "./accountSlice";
 import styled from "styled-components";
 
 const DateHeader = styled.div`
@@ -21,7 +20,7 @@ const MemoHeader = styled.div`
 `;
 
 function TransactionTable() {
-  const transactions = useSelector(selectTransactions);
+  const transactions = useSelector((state) => state.budget.transactions);
 
   return (
     <TableSpace columns="1fr 2.8fr 1.8fr 2.8fr 1fr 1fr 0.6fr">
