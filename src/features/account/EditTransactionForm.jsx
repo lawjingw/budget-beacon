@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ModalContext } from "../../ui/ModalContext";
 import TransactionForm from "./TransactionForm";
 import { useDispatch } from "react-redux";
-import { updateActivity, updateTransaction } from "../budget/budgetSlice";
+import { updateTransactionThunk } from "./accountSlice";
 
 function EditTransactionForm({ transaction }) {
   const methods = useForm({ defaultValues: transaction });
@@ -11,13 +11,7 @@ function EditTransactionForm({ transaction }) {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(
-      updateTransaction({
-        transactionId: transaction.id,
-        transaction: data,
-      })
-    );
-    dispatch(updateActivity(data.budgetId));
+    dispatch(updateTransactionThunk(transaction.id, data));
     closeModal();
   };
 

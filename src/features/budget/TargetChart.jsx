@@ -10,11 +10,11 @@ function TargetChart({ data }) {
     <ResponsiveContainer width="100%" height={100}>
       <PieChart>
         {percentage >= 100 ? (
-          <g>
+          <g transform="translate(-17 -17)">
             <FaCheck
               size={34}
-              x="44%"
-              y="34%"
+              x="50%"
+              y="52%"
               color="var(--color-accent-100)"
             />
           </g>
@@ -47,7 +47,7 @@ function TargetChart({ data }) {
                   ? "var(--color-accent-100)"
                   : "var(--color-primary-300)"
               }
-              fillOpacity={index === 1 && 0.1}
+              fillOpacity={index === 1 && "0.1"}
             />
           ))}
         </Pie>

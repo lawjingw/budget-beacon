@@ -6,9 +6,7 @@ import { ModalContext } from "../../ui/ModalContext";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { updateAccount } from "./accountSlice";
-import { getTodayString } from "../../utils/helpers";
-import { addTransaction, updateActivity } from "../budget/budgetSlice";
+import { updateAccountThunk } from "./accountSlice";
 
 function EditAccountForm() {
   const { name, currentBalance } = useSelector((state) => state.account);
@@ -22,21 +20,7 @@ function EditAccountForm() {
 
   const onSubmit = (data) => {
     const balanceDiff = data.currentBalance - currentBalance;
-
-    if (balanceDiff !== 0) {
-      const transaction = {
-        date: getTodayString(),
-        payee: "Manual Balance Adjustment",
-        budgetId: "readyToAssign",
-        memo: "",
-        cashFlow: balanceDiff < 0 ? "outflow" : "inflow",
-        amount: Math.abs(balanceDiff),
-      };
-      dispatch(updateAccount(data));
-      dispatch(addTransaction(transaction));
-      dispatch(updateActivity(transaction.budgetId));
-    }
-
+    dispatch(updateAccountThunk(data, balanceDiff));
     closeModal();
   };
 

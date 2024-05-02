@@ -46,16 +46,9 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
-const Footer = styled.footer`
-  background-color: var(--color-bg-100);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
-
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
+const StyledBody = styled.section`
+  max-height: 74rem;
+  overflow-y: scroll;
 `;
 
 const Empty = styled.p`
@@ -92,7 +85,7 @@ function Header({ children }) {
 function Body({ name, data, render }) {
   if (!data.length) return <Empty>No {name} to show at the moment</Empty>;
 
-  return <section>{data.map(render)}</section>;
+  return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
 function Row({ name, renderItem }) {
@@ -122,6 +115,5 @@ TableSpace.Table = Table;
 TableSpace.Header = Header;
 TableSpace.Body = Body;
 TableSpace.Row = Row;
-TableSpace.Footer = Footer;
 
 export default TableSpace;

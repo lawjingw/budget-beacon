@@ -20,7 +20,7 @@ const MemoHeader = styled.div`
 `;
 
 function TransactionTable() {
-  const transactions = useSelector((state) => state.budget.transactions);
+  const transactions = useSelector((state) => state.account.transactions);
 
   return (
     <TableSpace columns="1fr 2.8fr 1.8fr 2.8fr 1fr 1fr 0.6fr">
