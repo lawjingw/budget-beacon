@@ -2,6 +2,7 @@ import AccountBalance from "../features/account/AccountBalance";
 import AddTransaction from "../features/account/AddTransaction";
 import EditAccount from "../features/account/EditAccount";
 import TransactionTable from "../features/account/TransactionTable";
+import TransactionTableOperaction from "../features/account/TransactionTableOperaction";
 import Row from "../ui/Row";
 
 function Account() {
@@ -12,6 +13,7 @@ function Account() {
         <EditAccount />
       </Row>
       <Row $type="vertical">
+        <TransactionTableOperaction />
         <TransactionTable />
         <AddTransaction />
       </Row>

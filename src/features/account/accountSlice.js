@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 import { updateActivity } from "../budget/budgetSlice";
 import { getTodayString } from "../../utils/helpers";
-import { isSameMonth } from "date-fns";
+import { isSameMonth, startOfMonth, startOfYear, subMonths } from "date-fns";
 
 const initialState = {
   name: "",
@@ -18,6 +18,15 @@ const accountSlice = createSlice({
       const { name, currentBalance } = action.payload;
       state.name = name;
       state.currentBalance = currentBalance;
+    },
+    updateCurrentBalance(state) {
+      state.currentBalance = state.transactions.reduce(
+        (sum, transaction) =>
+          transaction.cashFlow === "outflow"
+            ? sum - transaction.amount
+            : sum + transaction.amount,
+        0
+      );
     },
     addTransaction: {
       reducer(state, action) {
@@ -57,8 +66,36 @@ const accountSlice = createSlice({
 
 export const selectCurrentBalance = (state) => state.account.currentBalance;
 
+export const selectTransactions = (state, filter, sortBy) => {
+  let transactions = state.account.transactions;
+
+  let queryDate = null;
+  if (filter === "this-month") {
+    queryDate = startOfMonth(new Date());
+  } else if (filter === "3-months") {
+    queryDate = startOfMonth(subMonths(new Date(), 2));
+  } else if (filter === "this-year") {
+    queryDate = startOfYear(new Date());
+  }
+
+  if (queryDate)
+    transactions = transactions.filter(
+      (trans) => new Date(trans.date) >= queryDate
+    );
+
+  const [field, order] = sortBy.split("-");
+  transactions.sort((a, b) => {
+    if (a[field] < b[field]) return order === "desc" ? 1 : -1;
+    if (a[field] > b[field]) return order === "desc" ? -1 : 1;
+    return 0;
+  });
+
+  return transactions;
+};
+
 export const {
   updateAccount,
+  updateCurrentBalance,
   addTransaction,
   updateTransaction,
   delTransaction,
@@ -109,6 +146,8 @@ export const addTransactionThunk = (transaction) => (dispatch, getState) => {
       transactions: transactions,
     })
   );
+
+  dispatch(updateCurrentBalance());
 };
 
 export const updateTransactionThunk =
@@ -132,6 +171,8 @@ export const updateTransactionThunk =
         transactions: transactions,
       })
     );
+
+    dispatch(updateCurrentBalance());
   };
 
 export const delTransactionThunk =
@@ -150,6 +191,8 @@ export const delTransactionThunk =
         transactions: transactions,
       })
     );
+
+    dispatch(updateCurrentBalance());
   };
 
 export default accountSlice.reducer;

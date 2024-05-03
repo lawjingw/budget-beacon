@@ -3,7 +3,6 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
 import Form from "../../ui/Form";
-import Select from "../../ui/Select";
 import { formatCurrency, getTodayString } from "../../utils/helpers";
 import {
   selectCategoryOptions,
@@ -18,6 +17,11 @@ const Amount = styled.div`
   & input {
     width: 100%;
   }
+`;
+
+const Select = styled.select`
+  border-radius: var(--border-radius-sm);
+  padding: 1rem 1.2rem;
 `;
 
 function TransactionForm({ methods, onSubmit, closeModal }) {
