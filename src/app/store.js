@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 const preloadedState = {
   account: {
     name: "My account",
-    currentBalance: 11711.4,
+    currentBalance: 11671.9,
     transactions: [
       {
         id: uuid(),
@@ -304,7 +304,7 @@ const preloadedState = {
         payee: "Weekday",
         budgetId: "6",
         cashFlow: "outflow",
-        amount: 14.5,
+        amount: 54,
         memo: "Jeans",
       },
       {
@@ -450,6 +450,7 @@ const preloadedState = {
       {
         id: "1",
         category: "🏠 Rent",
+        group: "Bills",
         assigned: 800,
         activity: -800,
         target: 800,
@@ -457,6 +458,7 @@ const preloadedState = {
       {
         id: "2",
         category: "🔌 Utilities",
+        group: "Bills",
         assigned: 150,
         activity: -102.6,
         target: 0,
@@ -464,6 +466,7 @@ const preloadedState = {
       {
         id: "3",
         category: "🛒 Groceries",
+        group: "Needs",
         assigned: 210,
         activity: -137.9,
         target: 260,
@@ -471,6 +474,7 @@ const preloadedState = {
       {
         id: "4",
         category: "🍽 Dining out",
+        group: "Wants",
         assigned: 60,
         activity: -24,
         target: 60,
@@ -478,6 +482,7 @@ const preloadedState = {
       {
         id: "5",
         category: "🕹 Entertainment",
+        group: "Wants",
         assigned: 10,
         activity: 0,
         target: 30,
@@ -485,6 +490,7 @@ const preloadedState = {
       {
         id: "6",
         category: "👗 Clothing",
+        group: "Needs",
         assigned: 50,
         activity: 8.3,
         target: 50,
@@ -492,6 +498,7 @@ const preloadedState = {
       {
         id: "7",
         category: "⛽ Gas",
+        group: "Bills",
         assigned: 0,
         activity: 0,
         target: 0,
@@ -499,6 +506,7 @@ const preloadedState = {
       {
         id: "8",
         category: "🥊 Fitness",
+        group: "Wants",
         assigned: 18,
         activity: -27,
         target: 18,
@@ -506,6 +514,7 @@ const preloadedState = {
       {
         id: "9",
         category: "🎧 Music",
+        group: "Bills",
         assigned: 10,
         activity: 0,
         target: 10,
@@ -513,6 +522,7 @@ const preloadedState = {
       {
         id: "10",
         category: "🏖 Vacation",
+        group: "Wants",
         assigned: 0,
         activity: 0,
         target: 500,
@@ -520,6 +530,7 @@ const preloadedState = {
       {
         id: "11",
         category: "💻 Internet",
+        group: "Bills",
         assigned: 10,
         activity: -10,
         target: 10,
@@ -527,6 +538,7 @@ const preloadedState = {
       {
         id: "12",
         category: "📄 Insurance",
+        group: "Bills",
         assigned: 40,
         activity: -40,
         target: 40,
@@ -534,6 +546,7 @@ const preloadedState = {
       {
         id: "13",
         category: "📺 TV streaming",
+        group: "Bills",
         assigned: 12,
         activity: 0,
         target: 0,
@@ -541,6 +554,7 @@ const preloadedState = {
       {
         id: "14",
         category: "📱 Cell phone",
+        group: "Needs",
         assigned: 0,
         activity: 0,
         target: 0,
@@ -548,6 +562,7 @@ const preloadedState = {
       {
         id: "15",
         category: "🚇 Transportation",
+        group: "Needs",
         assigned: 50,
         activity: 0,
         target: 0,

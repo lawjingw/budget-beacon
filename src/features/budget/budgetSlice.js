@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { formatCurrency } from "../../utils/helpers";
+import { floatify, formatCurrency } from "../../utils/helpers";
 
 export const initialState = {
   readyToAssign: 0,
@@ -10,8 +10,8 @@ const calActivity = (transactions) =>
   transactions.reduce(
     (sum, transaction) =>
       transaction.cashFlow === "outflow"
-        ? sum - transaction.amount
-        : sum + transaction.amount,
+        ? floatify(sum - transaction.amount)
+        : floatify(sum + transaction.amount),
     0
   );
 
@@ -77,8 +77,7 @@ export const selectCategoryById = (state, id) =>
 
 export const selectCategoryOptions = (state) =>
   state.budget.budgets.map((categoryBudget) => {
-    const activity = categoryBudget.activity;
-    const available = categoryBudget.assigned + activity;
+    const available = categoryBudget.assigned + categoryBudget.activity;
     return {
       value: categoryBudget.id,
       label: `${categoryBudget.category} [${formatCurrency(available)}]`,

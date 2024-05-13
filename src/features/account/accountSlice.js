@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 import { updateActivity } from "../budget/budgetSlice";
-import { getTodayString } from "../../utils/helpers";
+import { floatify, getTodayString } from "../../utils/helpers";
 import { isSameMonth, startOfMonth, startOfYear, subMonths } from "date-fns";
 
 const initialState = {
@@ -23,8 +23,8 @@ const accountSlice = createSlice({
       state.currentBalance = state.transactions.reduce(
         (sum, transaction) =>
           transaction.cashFlow === "outflow"
-            ? sum - transaction.amount
-            : sum + transaction.amount,
+            ? floatify(sum - transaction.amount)
+            : floatify(sum + transaction.amount),
         0
       );
     },
@@ -66,7 +66,7 @@ const accountSlice = createSlice({
 
 export const selectCurrentBalance = (state) => state.account.currentBalance;
 
-export const selectTransactions = (state, filter, sortBy) => {
+export const selectTransactions = (state, filter = "all", sortBy = null) => {
   let transactions = state.account.transactions;
 
   let queryDate = null;
@@ -83,12 +83,14 @@ export const selectTransactions = (state, filter, sortBy) => {
       (trans) => new Date(trans.date) >= queryDate
     );
 
-  const [field, order] = sortBy.split("-");
-  transactions.sort((a, b) => {
-    if (a[field] < b[field]) return order === "desc" ? 1 : -1;
-    if (a[field] > b[field]) return order === "desc" ? -1 : 1;
-    return 0;
-  });
+  if (sortBy) {
+    const [field, order] = sortBy.split("-");
+    transactions = [...transactions].sort((a, b) => {
+      if (a[field] < b[field]) return order === "desc" ? 1 : -1;
+      if (a[field] > b[field]) return order === "desc" ? -1 : 1;
+      return 0;
+    });
+  }
 
   return transactions;
 };

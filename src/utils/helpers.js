@@ -26,3 +26,5 @@ export const formatCurrency = (value) =>
   new Intl.NumberFormat("en", { style: "currency", currency: "GBP" }).format(
     value
   );
+
+export const floatify = (number) => parseFloat(number.toFixed(10));
