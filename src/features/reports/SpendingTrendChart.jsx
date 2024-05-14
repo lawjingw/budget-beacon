@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { selectTransactions } from "../account/accountSlice";
 import { floatify, formatCurrency } from "../../utils/helpers";
 import { format } from "date-fns";
+import { useSearchParams } from "react-router-dom";
 
 const ChartBox = styled.div`
   padding: 2.4rem 3.2rem;
@@ -81,19 +82,21 @@ function calculateGroupSpending(transactions) {
 
   return data;
 }
-function SpendingTrendChart() {
-  const transactions = useSelector((state) => selectTransactions(state));
+function SpendingTrendChart({ transactions }) {
   const data = calculateGroupSpending(transactions);
 
   return (
     <ChartBox>
       <Heading as="h2">Spending Trends</Heading>
       <ResponsiveContainer width="100%" height={440}>
-        <BarChart data={data} margin={{ left: 22 }}>
+        <BarChart data={data} margin={{ left: 22 }} maxBarSize={200}>
           <XAxis dataKey="name" />
-          <YAxis tickFormatter={(value) => formatCurrency(value)} />
+          <YAxis
+            tickCount={9}
+            tickFormatter={(value) => formatCurrency(value)}
+          />
           <Tooltip formatter={(value) => formatCurrency(value)} />
-          <Legend iconSize={15} iconType="square" />
+          <Legend iconSize={15} iconType="circle" />
           <Bar
             name="Bills"
             dataKey="bills"

@@ -11,6 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectTransactions } from "../account/accountSlice";
 import { floatify, formatCurrency } from "../../utils/helpers";
+import { useSearchParams } from "react-router-dom";
 
 const ChartBox = styled.div`
   padding: 2.4rem 3.2rem;
@@ -67,8 +68,7 @@ function prepareData(startData, transactions) {
   return data;
 }
 
-function SpendingTotalChart() {
-  const transactions = useSelector((state) => selectTransactions(state));
+function SpendingTotalChart({ transactions }) {
   const data = prepareData(startData, transactions);
   const totalSpending = data.reduce((arr, cur) => arr + cur.value, 0);
 
@@ -103,7 +103,7 @@ function SpendingTotalChart() {
             outerRadius={185}
             cx="50%"
             cy="50%"
-            animationBegin="100"
+            animationBegin={100}
           >
             {data.map((entry) => (
               <Cell fill={entry.color} stroke={entry.color} key={entry.group} />

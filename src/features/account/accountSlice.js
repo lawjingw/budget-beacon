@@ -66,7 +66,11 @@ const accountSlice = createSlice({
 
 export const selectCurrentBalance = (state) => state.account.currentBalance;
 
-export const selectTransactions = (state, filter = "all", sortBy = null) => {
+export const selectTransactions = (
+  state,
+  filter = "all",
+  sortBy = "date-desc"
+) => {
   let transactions = state.account.transactions;
 
   let queryDate = null;

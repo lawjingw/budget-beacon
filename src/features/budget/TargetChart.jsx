@@ -37,7 +37,7 @@ function TargetChart({ data }) {
           innerRadius={32}
           outerRadius={42}
           stroke="none"
-          animationBegin="100"
+          animationBegin={100}
         >
           {data.map((entry, index) => (
             <Cell
@@ -47,7 +47,7 @@ function TargetChart({ data }) {
                   ? "var(--color-accent-100)"
                   : "var(--color-primary-300)"
               }
-              fillOpacity={index === 1 && "0.1"}
+              fillOpacity={index === 1 ? "0.1" : undefined}
             />
           ))}
         </Pie>
