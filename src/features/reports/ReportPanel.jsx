@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectTransactions } from "../account/accountSlice";
 import { differenceInMonths, format } from "date-fns";
+import CategoriesSpending from "./CategoriesSpending";
 
 const Panel = styled.div`
   border: 1px solid var(--color-bg-300);
@@ -31,10 +32,7 @@ const Spending = styled.div`
   align-items: center;
   row-gap: 0.4rem;
   padding: 2rem 0;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-bg-300);
-  }
+  border-bottom: 1px solid var(--color-bg-300);
 
   & header {
     font-size: 1.4rem;
@@ -107,6 +105,7 @@ function ReportPanel() {
         <Heading as="h2">{averageSpending}</Heading>
         <p>Per month</p>
       </Spending>
+      <CategoriesSpending transactions={transactions} />
     </Panel>
   );
 }

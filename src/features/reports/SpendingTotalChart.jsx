@@ -8,10 +8,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { useSelector } from "react-redux";
-import { selectTransactions } from "../account/accountSlice";
 import { floatify, formatCurrency } from "../../utils/helpers";
-import { useSearchParams } from "react-router-dom";
 
 const ChartBox = styled.div`
   padding: 2.4rem 3.2rem;
@@ -63,7 +60,7 @@ function prepareData(startData, transactions) {
         return calSpending(arr, "Wants", cur.cashFlow, cur.amount);
       return arr;
     }, startData)
-    .filter((item) => item.value > 0);
+    .filter((item) => item.value !== 0);
 
   return data;
 }

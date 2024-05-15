@@ -9,11 +9,8 @@ import {
 } from "recharts";
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
-import { useSelector } from "react-redux";
-import { selectTransactions } from "../account/accountSlice";
 import { floatify, formatCurrency } from "../../utils/helpers";
 import { format } from "date-fns";
-import { useSearchParams } from "react-router-dom";
 
 const ChartBox = styled.div`
   padding: 2.4rem 3.2rem;
