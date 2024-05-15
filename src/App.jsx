@@ -1,10 +1,10 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Account from "./pages/Account";
 import Bedget from "./pages/Bedget";
 import Reports from "./pages/Reports";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <AppLayout />,
