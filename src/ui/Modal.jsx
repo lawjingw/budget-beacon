@@ -85,7 +85,7 @@ function Window({ name, children }) {
       <StyledModal ref={modalRef}>
         <ModalHeader>
           <p>{name}</p>
-          <Button onClick={close}>
+          <Button onClick={close} aria-label="close">
             <HiXMark />
           </Button>
         </ModalHeader>
