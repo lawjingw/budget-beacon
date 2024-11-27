@@ -19,8 +19,8 @@ const Img = styled.img`
 
 function Logo() {
   return (
-    <StyledLogo>
-      <Img src="./logo.png" alt="Logo" />
+    <StyledLogo aria-label="Budget Beacon Logo">
+      <Img src="./logo.png" alt="Budget Beacon logo" />
       <p>Budget Beacon</p>
     </StyledLogo>
   );

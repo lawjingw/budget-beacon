@@ -46,23 +46,23 @@ const StyledNavLink = styled(NavLink)`
 
 function MainNav() {
   return (
-    <nav>
+    <nav aria-label="Main Navigation">
       <NavList>
         <li>
-          <StyledNavLink to="/budget">
-            <BsCashCoin />
+          <StyledNavLink to="/budget" aria-label="Budget">
+            <BsCashCoin aria-hidden="true" />
             Budget
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/reports">
-            <BsBarChartLineFill />
+          <StyledNavLink to="/reports" aria-label="Reports">
+            <BsBarChartLineFill aria-hidden="true" />
             Reports
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/account">
-            <BsPiggyBankFill />
+          <StyledNavLink to="/account" aria-label="Account">
+            <BsPiggyBankFill aria-hidden="true" />
             Account
           </StyledNavLink>
         </li>

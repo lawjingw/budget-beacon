@@ -81,10 +81,14 @@ function Window({ name, children }) {
   if (openName !== name) return null;
 
   return createPortal(
-    <Overlay>
-      <StyledModal ref={modalRef}>
+    <Overlay role="presentation" aria-modal="true">
+      <StyledModal
+        ref={modalRef}
+        role="dialog"
+        aria-labelledby={`${name}-title`}
+      >
         <ModalHeader>
-          <p>{name}</p>
+          <p id={`${name}-title`}>{name}</p>
           <Button onClick={close} aria-label="close">
             <HiXMark />
           </Button>

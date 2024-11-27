@@ -31,17 +31,29 @@ function ConfirmDelete({ resourceName, onConfirm }) {
   };
 
   return (
-    <StyledConfirmDelete>
-      <p>
+    <StyledConfirmDelete
+      role="dialog"
+      aria-labelledby="confirm-delete-title"
+      aria-describedby="confirm-delete-description"
+    >
+      <p id="confirm-delete-description">
         Are you sure you want to delete this {resourceName} permanently? This
         action cannot be undone.
       </p>
 
       <div>
-        <Button $variation="secondary" onClick={() => closeModal?.()}>
+        <Button
+          $variation="secondary"
+          onClick={() => closeModal?.()}
+          aria-label="Cancel deletion"
+        >
           Cancel
         </Button>
-        <Button $variation="danger" onClick={handleConfirm}>
+        <Button
+          $variation="danger"
+          onClick={handleConfirm}
+          aria-label="Confirm deletion"
+        >
           Delete
         </Button>
       </div>

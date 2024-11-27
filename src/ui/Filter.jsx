@@ -43,13 +43,14 @@ function Filter({ filterField, options }) {
   };
 
   return (
-    <StyledFilter>
+    <StyledFilter role="group" aria-label={`Filter by ${filterField}`}>
       {options.map((option) => (
         <FilterButton
           onClick={() => handleClick(option.value)}
           $active={currentOption === option.value}
           disabled={currentOption === option.value}
           key={option.value}
+          aria-pressed={currentOption === option.value}
         >
           {option.label}
         </FilterButton>

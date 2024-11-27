@@ -43,7 +43,11 @@ function FormRow({ label, errors, childId = null, children }) {
         <ErrorMessage
           errors={errors}
           name={id}
-          render={({ message }) => <Error>{message}</Error>}
+          render={({ message }) => (
+            <Error role="alert" aria-live="assertive">
+              {message}
+            </Error>
+          )}
         />
       )}
     </StyledFormRow>

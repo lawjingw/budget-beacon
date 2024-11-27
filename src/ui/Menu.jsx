@@ -130,8 +130,8 @@ function Button({ icon, children, onClick }) {
   };
 
   return (
-    <li>
-      <Styledbutton onClick={handleClick}>
+    <li role="menuitem">
+      <Styledbutton onClick={handleClick} aria-label={children}>
         {icon}
         <span>{children}</span>
       </Styledbutton>
