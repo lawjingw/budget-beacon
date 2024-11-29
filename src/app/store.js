@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import accountReducer from "../features/account/accountSlice";
 import budgetReducer from "../features/budget/budgetSlice";
 import { backMonth, getTodayString } from "../utils/helpers";
